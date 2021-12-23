@@ -1,0 +1,5 @@
+target/*
+src/main/resources/*
+credentials.json
+credentials.p12
+client_secret.json

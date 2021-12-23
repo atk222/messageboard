@@ -1,0 +1,134 @@
+PHASE 1 INFO (Jack)
+1. Inserted 'clickLike' method into ElementList.ts, added to the update method, commented out buttons, and fixed indentation
+2. Added divs addElement, editElement, and 'showElements' to index.html
+3. Filled ElementList.css with formatting
+4. changed Handlebars class to table in index.html
+5. added the navbar to index.html
+6. added newEntryform stuff to index, added elmentList.refresh to app.ts
+7. added the body of index.html to the body of spec_runner.html
+8. index.html now refactored to just have navbar, table, and NewEntryForm in the body
+
+Current Errors:
+    Clicking 'Like' Shuffles the order of the entries
+    Clicking 'Delete' deletes the message, and duplicates the table
+    Clicking 'Edit' does nothing
+    Clicking 'Add' does nothing
+    Navbar doesn't always go on top
+
+
+
+
+Merge web into backend, not the other way around to test functionality
+
+For Unit Testing:
+	peep frontend tutorial
+	google shit bout it
+
+
+<div class="panel panel-default" id="ElementList">
+	This section is the table which holds the buttons and message display
+        <table class="table">
+            <tbody>
+                Messages
+                <tr>
+       		        <td><button class="ElementList-likebtn" data-value="{{this.mId}}">Like</button></td>
+        		    This will be the like counter
+		            <td># likes</td> This line will make a call to getLikes
+                    <td><button class="ElementList-editbtn" data-value="{{this.mId}}">Edit</button></td>
+                    <td><button class="ElementList-delbtn" data-value="{{this.mId}}">Delete</button></td>
+                </tr>
+            </tbody>
+	</table>
+</div>
+
+<div class="panel panel-default" id="ElementList">
+</div>
+
+Old hb:
+Navbar
+<!--
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" 
+                data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <!-- Clicking the brand refreshes the page -->
+            <a class="navbar-brand" href="/">My Web Frontend</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a class="btn btn-link" id="Navbar-add">
+                        Add Entry
+                        <span class="glyphicon glyphicon-plus"></span><span class="sr-only">Show Trending Posts</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+-->
+table
+<!--
+<div class="panel panel-default" id="ElementList">
+    <div class="panel-heading">
+        <h3 class="panel-title">All Data</h3>
+    </div>
+    <table class="table">
+        <tbody>
+            {{#each mData}}
+            <tr>
+                <td>{{this.mTitle}}</td><td>{{this.mMessage}}</td>
+                <td><button class="ElementList-editbtn" data-value="{{this.mId}}">Edit</button></td>
+                <td><button class="ElementList-delbtn" data-value="{{this.mId}}">Delete</button></td>
+                <td>{{this.mLikes}}</td>
+                <td><button class="ElementList-likebtn" data-value="{{this.mId}}">Like</button></td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
+-->
+NewEntryForm
+<!--
+<div id="NewEntryForm" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add a New Entry</h4>
+            </div>
+            <div class="modal-body">
+                <label for="NewEntryForm-title">Title</label>
+                <input class="form-control" type="text" id="NewEntryForm-title" />
+                <label for="NewEntryForm-message">Message</label>
+                <textarea class="form-control" id="NewEntryForm-message"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" id="NewEntryForm-OK">OK</button>
+                <button type="button" class="btn btn-default" id="NewEntryForm-Close">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+-->
+
+PHASE 2 INFO (Andrew)
+**When testing locally with ldeploy.sh, make sure to use localhost:8080 instead
+of ip address provided by npm http-server OR ELSE GOOGLE SIGN IN WON'T WORK
+    - I am not sure why it is like that
+    - And make sure http://localhost:8080 is in google developer console for whitelisted URIs
+
+How I structured code
+-- all UI changes are done from relative typescript files
+    -- ex. if signout button is pressed from navbar, then the UI change will be handled in Navbar.ts
+-- When trying to remove UI, DO NOT REMOVE <iFrame> element
+    -- google uses that to make google sign in work
+-- Need to add event param to onclick events for element list
+    -- so like/del buttons do not also trigger the button for the entire row (For viewing post)
